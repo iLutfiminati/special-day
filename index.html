@@ -103,6 +103,12 @@
       animation: pulse 1.5s infinite;
     }
 
+    .birthday:hover {
+      background-color: #ff85c1;
+      transform: scale(1.1);
+      box-shadow: 0 0 25px rgba(255, 105, 180, 0.7);
+    }
+
     @keyframes pulse {
       0%, 100% { transform: scale(1); box-shadow: 0 0 10px rgba(255, 105, 180, 0.5); }
       50% { transform: scale(1.05); box-shadow: 0 0 20px rgba(255, 105, 180, 0.7); }
@@ -114,6 +120,10 @@
         padding: 15px;
         font-size: 1em;
       }
+
+      .calendar {
+        grid-template-columns: repeat(5, 1fr);
+      }
     }
   </style>
 </head>
@@ -121,7 +131,7 @@
   <!-- Loading -->
   <div id="countdown-container">
     <div>✨ Memuat kalender spesial ✨</div>
-    <div>Dalam <span id="countdown">5</span> detik...</div>
+    <div>Tersisa <span id="countdown">...</span></div>
   </div>
 
   <!-- Kalender -->
@@ -163,20 +173,30 @@
   </div>
 
   <script>
-    let countdown = 5;
-    const countdownEl = document.getElementById("countdown");
     const countdownContainer = document.getElementById("countdown-container");
     const calendarContainer = document.getElementById("calendar-container");
+    const countdownEl = document.getElementById("countdown");
+
+    // Target waktu: 9 November 2025, pukul 23:59
+    const targetTime = new Date("2025-11-09T23:59:00").getTime();
 
     const timer = setInterval(() => {
-      countdown--;
-      countdownEl.textContent = countdown;
+      const now = new Date().getTime();
+      const distance = targetTime - now;
 
-      if (countdown <= 0) {
+      if (distance <= 0) {
+        // Jika sudah waktunya, tampilkan kalender
         clearInterval(timer);
         countdownContainer.style.display = "none";
         calendarContainer.style.display = "block";
         document.body.style.overflow = "auto";
+      } else {
+        // Hitung mundur (dalam jam, menit, detik)
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        countdownEl.textContent = `${hours} jam ${minutes} menit ${seconds} detik`;
       }
     }, 1000);
 
