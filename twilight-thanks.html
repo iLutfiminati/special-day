@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Another Page 🌙</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Pacifico', cursive;
+      text-align: center;
+      overflow: hidden;
+      height: 100vh;
+      background: linear-gradient(180deg, #f8e1f4 0%, #c6e2ff 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 90%;
+      max-width: 600px;
+      animation: fadeIn 1.5s ease;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    img {
+      width: 160px;
+      height: auto;
+      margin-bottom: 25px;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+    }
+
+    h1 {
+      font-size: clamp(18px, 5vw, 26px);
+      color: #4a4a6a;
+      margin-bottom: 40px;
+      line-height: 1.6;
+      text-shadow: 0 1px 2px rgba(255,255,255,0.6);
+      word-wrap: break-word;
+    }
+
+    button {
+      padding: 12px 40px;
+      border: none;
+      border-radius: 30px;
+      font-size: clamp(16px, 4vw, 20px);
+      cursor: pointer;
+      background: linear-gradient(90deg, #a5d8ff, #f8a5c2);
+      color: white;
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(20px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    button:hover {
+      transform: translateY(0) scale(1.05);
+      box-shadow: 0 6px 15px rgba(248, 165, 194, 0.5);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 480px) {
+      img {
+        width: 130px;
+      }
+      h1 {
+        margin-bottom: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="https://media.tenor.com/dGyeBeYm3r8AAAAj/bubu-dudu-bubu.gif" alt="Apipi Panda">
+    <h1 id="apipiText"></h1>
+    <button onclick="goCelebrate()">Yuk Lanjut!</button>
+  </div>
+
+  <script>
+    const apipiText = "Apipi!! Makasih ya udah jawab 😇\nTuh kan, aku mah emang gak tengil 😎\nJangan manyun dong...\nMasih ada lagi loh..\nAyo lanjut~";
+    const h1Element = document.getElementById("apipiText");
+    const button = document.querySelector("button");
+    let index = 0;
+
+    function typeWriter() {
+      if (index < apipiText.length) {
+        const char = apipiText.charAt(index);
+        h1Element.innerHTML += (char === "\n" ? "<br>" : char);
+        index++;
+        setTimeout(typeWriter, 120);
+      } else {
+        button.style.opacity = "1";
+        button.style.transition = "opacity 1s ease, transform 0.5s ease";
+        button.style.transform = "translateY(0)";
+      }
+    }
+
+    window.onload = typeWriter;
+
+    function goCelebrate() {
+      window.location.href = "twilight-celebrate.html";
+    }
+  </script>
+</body>
+</html>

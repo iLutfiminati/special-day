@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Letter 💌</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Pacifico', cursive;
+    background: linear-gradient(135deg, #fff0f5, #ffe4ec, #ffddee);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    text-align: center;
+  }
+
+  h1 {
+    margin-top: 30px;
+    color: #ff6b81;
+    font-size: 2rem;
+    animation: fadeIn 1.5s ease;
+  }
+
+  .polaroids {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 40px 0;
+  }
+
+  .polaroid {
+    width: 180px;
+    height: 220px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(255, 182, 193, 0.5);
+    padding: 10px;
+    transform: rotate(-2deg);
+    transition: transform 0.3s ease;
+  }
+
+  .polaroid:nth-child(2) {
+    transform: rotate(3deg);
+  }
+
+  .polaroid:hover {
+    transform: scale(1.05) rotate(0deg);
+  }
+
+  .polaroid img {
+    width: 100%;
+    height: 85%;
+    object-fit: cover;
+    border-radius: 8px;
+  }
+
+  .caption {
+    margin-top: 8px;
+    font-size: 1rem;
+    color: #ff6b81;
+  }
+
+  .message-box {
+    max-width: 500px;
+    background: rgba(255, 255, 255, 0.7);
+    padding: 20px 25px;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(255, 192, 203, 0.4);
+    backdrop-filter: blur(6px);
+    animation: fadeIn 2s ease 0.5s forwards;
+    opacity: 0;
+  }
+
+  .message-box p {
+    font-size: 1.2rem;
+    color: #444;
+    margin: 0;
+  }
+
+  .back-btn {
+    margin-top: 50px;
+    padding: 10px 25px;
+    border: none;
+    background-color: #ff6b81;
+    color: white;
+    font-family: 'Pacifico', cursive;
+    font-size: 1rem;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(255, 105, 135, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .back-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(255, 105, 135, 0.4);
+  }
+
+  /* bubble latar */
+  .bubble {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.5;
+    animation: float 10s infinite ease-in-out;
+  }
+
+  .bubble:nth-child(1) { width: 80px; height: 80px; left: 15%; background: #ffd1dc; animation-delay: 1s; }
+  .bubble:nth-child(2) { width: 60px; height: 60px; left: 70%; background: #bde0fe; animation-delay: 3s; }
+  .bubble:nth-child(3) { width: 100px; height: 100px; left: 45%; background: #ffc8dd; animation-delay: 5s; }
+
+  @keyframes float {
+    0% { transform: translateY(0); opacity: 0.4; }
+    50% { transform: translateY(-50px); opacity: 0.7; }
+    100% { transform: translateY(0); opacity: 0.4; }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+
+<body>
+
+  <!-- Bubble Background -->
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+  <div class="bubble"></div>
+
+  <h1>🎂Congrats! On becoming a year older🥳</h1>
+
+  <div class="polaroids">
+    <div class="polaroid">
+      <img src="vale.jpg" alt="photo1">
+      <div class="caption">Captured Smile 🌸</div>
+    </div>
+    <div class="polaroid">
+      <img src="vale5.jpg" alt="photo2">
+      <div class="caption">Lovely Day 💕</div>
+    </div>
+  </div>
+
+ <div class="message-box">
+  <p>Hey, it’s the 10th today! That’s your birthday, right? 🎂</p>
+  <p>Happy birthday, yaaa! 🤍🌷</p>
+  <br>
+  <p>Waktu cepat banget, ya. Rasanya baru kemarin kita kenal, tapi sekarang kamu sudah bertambah umur aja nih.
+  Mungkin hari ini terasa biasa aja, atau mungkin hari ini adalah hari yang sudah kamu tunggu-tunggu.</p>
+  <p>Tapi tetap aja, hari ini spesial — karena ini hari kamu, hari di mana kamu mulai lagi perjalanan baru.</p>
+  <br>
+  <p>Aku cuma pengin ngucapin selamat ulang tahun.</p>
+  <p>Semoga di umur kamu yang sekarang, banyak hal baik datang tanpa harus kamu kejar.
+  Semoga kamu selalu sehat, dikelilingi orang-orang yang tulus, dan tetap jadi versi terbaik dari diri kamu sendiri.
+  Aku harap hal-hal yang kamu impikan bisa pelan-pelan tercapai, satu per satu, tanpa tekanan.</p>
+  <br>
+  <p>Oh iya, jangan lupa istirahat juga ya.
+  Akhir-akhir ini kamu sering begadang, tidurnya pagi terus.
+  Sayangi badanmu, jangan terlalu maksain diri.</p>
+  <p>Hari ini... cukup tersenyum, bersyukur, dan nikmati waktumu.</p>
+  <p>Semoga langkahmu ke depan selalu ringan dan penuh senyum. 🌷</p>
+  <p>Dan sekali lagi... <strong>Happy Birthday 🤍🎂</strong></p>
+</div>
+
+
+  <button class="back-btn" onclick="goBack()">← Back</button>
+
+  <audio id="bg-music" src="hbd.mp3" autoplay loop></audio>
+
+<script>
+function goBack() {
+  window.location.href = "celebrate.html";
+}
+
+// kontrol musik (pause saat klik layar dua kali)
+const music = document.getElementById("bg-music");
+document.body.addEventListener("dblclick", () => {
+  if (music.paused) music.play();
+  else music.pause();
+});
+</script>
+
+</body>
+</html>

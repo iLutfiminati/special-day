@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Albums 📸</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<style>
+body {
+  margin: 0;
+  padding: 20px;
+  font-family: 'Pacifico', cursive;
+  background-color: #fff8f0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #ff69b4;
+  text-align: center;
+}
+
+.back-btn {
+  padding: 10px 25px;
+  background: linear-gradient(90deg, #ff9ec3, #ff6b81);
+  border: none;
+  border-radius: 25px;
+  font-size: 1rem;
+  color: white;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.back-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Album Grid */
+.album {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 20px;
+  max-width: 1000px;
+  justify-items: center;
+}
+
+.polaroid {
+  width: 180px;
+  background: #fff;
+  padding: 10px 10px 25px 10px;
+  box-shadow: 0 8px 12px rgba(0,0,0,0.2);
+  transform: rotate(calc(-5deg + 10deg * var(--i))) translateY(20px);
+  opacity: 0;
+  transition: transform 0.3s, opacity 0.3s;
+  cursor: pointer;
+  position: relative;
+}
+.polaroid.show {
+  transform: rotate(calc(-5deg + 10deg * var(--i))) translateY(0);
+  opacity: 1;
+}
+.polaroid:hover {
+  transform: rotate(0deg) scale(1.05);
+}
+.polaroid img,
+.polaroid video {
+  width: 100%;
+  display: block;
+  border-radius: 5px;
+  object-fit: cover;
+  height: 180px;
+}
+.caption {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #555;
+}
+.sticker {
+  position: absolute;
+  font-size: 24px;
+  top: -10px;
+  right: -10px;
+  transform: rotate(calc(-20deg + 40deg * var(--i)));
+}
+
+/* Lightbox */
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 1000;
+}
+.lightbox.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.lightbox img,
+.lightbox video {
+  max-width: 90%;
+  max-height: 80%;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+}
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 2rem;
+  color: white;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+/* Music Button */
+.music-btn {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+  background: linear-gradient(90deg, #ff8fab, #ff6b81);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-family: 'Pacifico', cursive;
+  font-size: 16px;
+  box-shadow: 0 3px 10px rgba(255, 182, 193, 0.4);
+  transition: transform 0.3s ease;
+  z-index: 1100;
+}
+.music-btn:hover {
+  transform: scale(1.1);
+}
+
+/* Responsive */
+@media (max-width: 800px) {
+  .album {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 500px) {
+  .album {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .polaroid {
+    width: 140px;
+  }
+}
+</style>
+</head>
+<body>
+
+<h1>📸 My Albums 📸</h1>
+<button class="back-btn" onclick="goBack()">⬅ Back</button>
+
+<!-- Album -->
+<div class="album">
+  <!-- 1 -->
+  <div class="polaroid" style="--i:0">
+    <img src="vale.jpg" alt="Photo 1">
+    <div class="caption">So cute! 💖</div>
+    <div class="sticker">🌸</div>
+  </div>
+  <!-- 2 -->
+  <div class="polaroid" style="--i:1">
+     <video src="vale.mov" muted loop playsinline></video>
+    <div class="caption">Lovely moment ✨</div>
+    <div class="sticker">💌</div>
+  </div>
+  <!-- 3 -->
+  <div class="polaroid" style="--i:2">
+    <img src="vale2.png" alt="Photo 3">
+    <div class="caption">Happy times 😄</div>
+    <div class="sticker">🌟</div>
+  </div>
+  <!-- 4 -->
+  <div class="polaroid" style="--i:0">
+    <img src="vale4.png" alt="Photo 4">
+    <div class="caption">So cute! 💖</div>
+    <div class="sticker">🌸</div>
+  </div>
+  <!-- 5 -->
+  <div class="polaroid" style="--i:1">
+    <img src="vale5.jpg" alt="Photo 5">
+    <div class="caption">Lovely moment ✨</div>
+    <div class="sticker">💌</div>
+  </div>
+  <!-- 6 -->
+  <div class="polaroid" style="--i:2">
+    <img src="vale.jpg" alt="Photo 6">
+    <div class="caption">Happy times 😄</div>
+    <div class="sticker">🌟</div>
+  </div>
+  <!-- 7 -->
+  <div class="polaroid" style="--i:0">
+    <img src="https://i.pinimg.com/1200x/d1/40/27/d14027acaa593f0db63250fe9c266163.jpg" alt="Photo 7">
+    <div class="caption">So cute! 💖</div>
+    <div class="sticker">🌸</div>
+  </div>
+  <!-- 8 -->
+  <div class="polaroid" style="--i:1">
+    <img src="https://i.pinimg.com/1200x/b6/fc/2f/b6fc2f0a65635972ea2ecb9be58be16c.jpg" alt="Photo 8">
+    <div class="caption">Lovely moment ✨</div>
+    <div class="sticker">💌</div>
+  </div>
+  <!-- 9 -->
+  <div class="polaroid" style="--i:2">
+    <img src="https://i.pinimg.com/736x/1c/44/46/1c4446675fb6ab8e06e1b8a9f3c2cb4e.jpg" alt="Photo 9">
+    <div class="caption">Happy times 😄</div>
+    <div class="sticker">🌟</div>
+  </div>
+  <!-- 10 -->
+  <div class="polaroid" style="--i:0">
+    <img src="https://i.pinimg.com/736x/77/d3/92/77d392cedd690992062b98b8c51316ed.jpg" alt="Photo 10">
+    <div class="caption">Happy times 😄</div>
+    <div class="sticker">🌟</div>
+  </div>
+  <!-- 11 -->
+  <div class="polaroid" style="--i:1">
+    <img src="https://i.pinimg.com/736x/9e/0a/86/9e0a867572ad7c2bbd3573f1af710e82.jpg" alt="Photo 11">
+    <div class="caption">Happy times 😄</div>
+    <div class="sticker">🌟</div>
+  </div>
+  <!-- 12 -->
+  <div class="polaroid" style="--i:2">
+    <img src="https://i.pinimg.com/736x/32/8d/08/328d088e521ecf40b0b75002b893b9c6.jpg" alt="Photo 12">
+    <div class="caption">Happy times 😄</div>
+    <div class="sticker">🌟</div>
+  </div>
+  <!-- 13 -->
+  <div class="polaroid" style="--i:0">
+    <img src="https://i.pinimg.com/1200x/7e/ca/7c/7eca7cd0cf5f68af9679b81dc45f5e87.jpg" alt="Photo 13">
+    <div class="caption">Happy times 😄</div>
+    <div class="sticker">🌟</div>
+  </div>
+  <!-- 14 -->
+  <div class="polaroid" style="--i:1">
+    <img src="https://i.pinimg.com/1200x/2c/e8/08/2ce808230796eb239feabb0b270acf9d.jpg" alt="Photo 14">
+    <div class="caption">Happy times 😄</div>
+    <div class="sticker">🌟</div>
+  </div>
+  <!-- 15 -->
+  <div class="polaroid" style="--i:2">
+    <img src="https://i.pinimg.com/736x/7b/b9/48/7bb948b292ee940298810d4e5f864629.jpg" alt="Photo 15">
+    <div class="caption">Happy times 😄</div>
+    <div class="sticker">🌟</div>
+  </div>
+  <!-- 16 -->
+  <div class="polaroid" style="--i:0">
+    <img src="https://i.pinimg.com/736x/99/42/b9/9942b9b41c515c27a3484be52348d922.jpg" alt="Photo 16">
+    <div class="caption">Happy times 😄</div>
+    <div class="sticker">🌟</div>
+  </div>
+  <!-- 17 -->
+  <div class="polaroid" style="--i:1">
+    <img src="https://i.pinimg.com/736x/c4/dc/58/c4dc587dd23bef5ab7b47e39dbb48cae.jpg" alt="Photo 17">
+    <div class="caption">Happy times 😄</div>
+    <div class="sticker">🌟</div>
+  </div>
+  <!-- 18 -->
+  <div class="polaroid" style="--i:2">
+    <img src="https://i.pinimg.com/736x/e8/dc/be/e8dcbe64bd34dc59a2702c0b38556410.jpg" alt="Photo 18">
+    <div class="caption">Happy times 😄</div>
+    <div class="sticker">🌟</div>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="close-btn" onclick="closeLightbox()">✖</button>
+  <img id="lightbox-img" style="display:none">
+  <video id="lightbox-video" controls style="display:none"></video>
+</div>
+
+<!-- Music -->
+<audio id="bgMusic" loop>
+  <source src="melodi.mp3" type="audio/mpeg">
+</audio>
+<button id="playBtn" class="music-btn">🎵 Play</button>
+
+<script>
+function goBack(){
+  window.location.href = "celebrate.html";
+}
+
+// Fade-in polaroid
+const polaroids = document.querySelectorAll('.polaroid');
+polaroids.forEach((p, i) => {
+  setTimeout(() => p.classList.add('show'), i*200);
+});
+
+// Lightbox
+const lightbox = document.getElementById('lightbox');
+const lbImg = document.getElementById('lightbox-img');
+const lbVideo = document.getElementById('lightbox-video');
+
+polaroids.forEach(p => {
+  p.addEventListener('click', () => {
+    const img = p.querySelector('img');
+    const video = p.querySelector('video');
+
+    if(img){
+      lbVideo.style.display = 'none';
+      lbVideo.pause();
+      lbImg.src = img.src;
+      lbImg.style.display = 'block';
+    } else if(video){
+      lbImg.style.display = 'none';
+      lbVideo.src = video.src;
+      lbVideo.style.display = 'block';
+      lbVideo.play();
+    }
+
+    lightbox.classList.add('active');
+  });
+});
+
+function closeLightbox(){
+  lightbox.classList.remove('active');
+  lbVideo.pause();
+}
+
+// Musik toggle
+const music = document.getElementById('bgMusic');
+const btn = document.getElementById('playBtn');
+
+btn.addEventListener('click', () => {
+  if(music.paused){
+    music.play();
+    btn.textContent = '⏸ Pause';
+  } else {
+    music.pause();
+    btn.textContent = '🎵 Play';
+  }
+});
+</script>
+
+</body>
+</html>
