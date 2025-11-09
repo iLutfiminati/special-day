@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Another Page ✨</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Pacifico&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Pacifico', cursive;
+      background: url('https://i.pinimg.com/736x/fd/cc/8b/fdcc8b23c411e288ccdfdf7b49382412.jpg') no-repeat center center/cover;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      overflow: hidden;
+      color: #fffafc;
+      text-align: center;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1;
+      backdrop-filter: blur(3px);
+    }
+
+    #birthdayGif, #textContainer, #buttonContainer {
+      position: relative;
+      z-index: 2;
+    }
+
+    #birthdayGif {
+      width: 200px;
+      max-width: 80%;
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeIn 2s ease forwards 0.8s;
+    }
+
+    #textContainer {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.4rem;
+      opacity: 0;
+      margin: 0 20px;
+      animation: fadeIn 2s ease forwards 1.5s;
+      color: #ffe4ec;
+      text-shadow: 0 0 10px rgba(255, 192, 203, 0.7);
+    }
+
+    #buttonContainer {
+      margin-top: 25px;
+      display: none;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    #continueBtn, #noBtn {
+      padding: 10px 25px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 30px;
+      background: linear-gradient(90deg, #a26eff, #ff8db3);
+      color: white;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    #continueBtn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+    }
+
+    #noBtn {
+      position: relative;
+      background: linear-gradient(90deg, #ffb6b9, #fcd2ff);
+      color: #5c4b73;
+    }
+
+    #noBtn:hover {
+      transform: rotate(-5deg);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fallingEmoji {
+      position: fixed;
+      top: -50px;
+      font-size: 24px;
+      opacity: 0.8;
+      animation: fallEmoji linear forwards;
+      z-index: 3;
+    }
+
+    @keyframes fallEmoji {
+      0% { transform: translateY(0px) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+
+    @media (max-width: 600px) {
+      #textContainer { font-size: 1.8rem; }
+      #birthdayGif { width: 150px; }
+    }
+  </style>
+</head>
+<body>
+
+  <img id="birthdayGif" src="https://media.tenor.com/47n_N6WlrH4AAAAj/dudu-bubu.gif" alt="Bubu Dudu Cute">
+  <div id="textContainer"></div>
+
+  <div id="buttonContainer">
+    <button id="continueBtn">Lanjut 🎉</button>
+    <button id="noBtn">Engga 😅</button>
+  </div>
+
+  <script>
+    const textContainer = document.getElementById('textContainer');
+    const gif = document.getElementById('birthdayGif');
+    const continueBtn = document.getElementById('continueBtn');
+    const noBtn = document.getElementById('noBtn');
+    const buttonContainer = document.getElementById('buttonContainer');
+
+    const messages = [
+      "Haii Vale… mungkin ini nggak seberapa buat kamu",
+      "tapi aku cuma pengen bikin kamu tersenyum meski cuma sebentar.",
+      "Kadang hal kecil aja bisa berarti banyak, apalagi kalau tulus dari hati.",
+      "Semoga malam ini kamu ngerasa sedikit lebih hangat, ya 💖"
+    ];
+
+    const emojis = ['🌸','💖','💙','⭐','🌙','✨'];
+
+    function typeWriter(sentence, container, callback, i = 0) {
+      if (i < sentence.length) {
+        const span = document.createElement('span');
+        span.textContent = sentence.charAt(i);
+        container.appendChild(span);
+        setTimeout(() => typeWriter(sentence, container, callback, i + 1), 90);
+      } else {
+        container.appendChild(document.createElement('br'));
+        if (callback) callback();
+      }
+    }
+
+    function showMessages(arr, container, index = 0) {
+      if (index < arr.length) {
+        typeWriter(arr[index], container, () => {
+          setTimeout(() => showMessages(arr, container, index + 1), 600);
+        });
+      } else {
+        showButtons();
+      }
+    }
+
+    function createEmoji() {
+      const emoji = document.createElement('div');
+      emoji.classList.add('fallingEmoji');
+      emoji.style.left = Math.random() * window.innerWidth + 'px';
+      emoji.style.fontSize = (20 + Math.random() * 20) + 'px';
+      emoji.style.animationDuration = (3 + Math.random() * 3) + 's';
+      emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      document.body.appendChild(emoji);
+      setTimeout(() => emoji.remove(), 6000);
+    }
+
+    setInterval(createEmoji, 400);
+
+    setTimeout(() => {
+      gif.style.opacity = 1;
+      setTimeout(() => {
+        textContainer.style.opacity = 1;
+        showMessages(messages, textContainer);
+      }, 1000);
+    }, 1000);
+
+    function showButtons() {
+      buttonContainer.style.display = 'flex';
+    }
+
+    noBtn.addEventListener('mouseover', () => {
+      noBtn.style.position = 'absolute';
+      const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+      const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+      noBtn.style.left = x + 'px';
+      noBtn.style.top = y + 'px';
+    });
+
+    continueBtn.addEventListener('click', () => {
+      setTimeout(() => {
+        window.location.href = "celebrate.html";
+      }, 1000);
+    });
+  </script>
+</body>
+</html>
