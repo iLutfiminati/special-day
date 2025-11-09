@@ -18,7 +18,7 @@
     justify-content: center;
     height: 100vh;
     text-align: center;
-    overflow: hidden;
+    overflow: auto;
     position: relative;
   }
 
@@ -77,8 +77,11 @@
   }
 
   footer {
-    position: absolute;
-    bottom: 15px;
+    position: fixed;
+    bottom: 0;
+     width: 100%;
+  text-align: center;
+  padding: 5px 0;
     font-size: 0.9rem;
     color: #666;
     z-index: 2;
